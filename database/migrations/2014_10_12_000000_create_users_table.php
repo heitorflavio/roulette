@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->integer('status')->default(1);
-            $table->decimal('balance', 20, 2)->default(0);
+            $table->decimal('balance', 20, 2)->default(1000);
             $table->timestamps();
         });
     }

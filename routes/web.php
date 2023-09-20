@@ -32,12 +32,22 @@ Route::get('/case/{name}', [App\Http\Controllers\HomeController::class, 'show'])
 Route::post('/open/{name}', [App\Http\Controllers\BoxController::class, 'open'])->name('open');
 
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-});
+Route::get('/login', function(){ return Inertia::render('Auth/Login'); })->name('login');
+Route::get('/register', function(){ return Inertia::render('Auth/Register'); })->name('register');
+
+Route::get('/login', function(){ return Inertia::render('Auth/Login'); })->name('login');
+Route::get('/register', function(){ return Inertia::render('Auth/Register'); })->name('register');
+Route::post('/register',[App\Http\Controllers\HomeController::class, 'register'] )->name('register.post');
+Route::post('/login',[App\Http\Controllers\HomeController::class, 'login'] )->name('login.post');
+
+
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return Inertia::render('Dashboard');
+//     })->name('dashboard');
+// });

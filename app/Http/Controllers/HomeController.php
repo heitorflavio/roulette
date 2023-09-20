@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Models\Box;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -24,10 +26,15 @@ class HomeController extends Controller
 
         $cases = box::where('status', 1)->get();
 
-        
+        if( auth()->user()){
+            $balance = auth()->user()->balance;
+        }else{
+            $balance = 0;
+        }
 
         return Inertia::render('Home', [
             'cases' => $cases,
+            'balances' => $balance,
         ]);
      
     }
@@ -56,10 +63,17 @@ class HomeController extends Controller
     {
         $case = box::where('link', $name)->first();
         $items = Product::where('box_id', $case->id)->get();
+
+        if( auth()->user()){
+            $balance = auth()->user()->balance;
+        }else{
+            $balance = 0;
+        }
+
         return Inertia::render('Case', [
             'box' => $case,
             'items' => $items,
-            'balances' => auth()->user()->balance,
+            'balances' => $balance,
         ]);
     }
 
@@ -85,5 +99,38 @@ class HomeController extends Controller
     public function destroy(Home $home)
     {
         //
+    }
+
+    public function login(Request $request){
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('/');
+        } else {
+            // Login falhou, exibir mensagem de erro
+            return redirect()->back()->withErrors(['login' => 'Credenciais inválidas, tente novamente.']);
+        }
+    }
+
+    public function register(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',       
+        ]);
+
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+
+        ]);
+
+
+        return redirect('/login');
+
+     
     }
 }

@@ -1,24 +1,27 @@
 <template>
-    <div class="bg-gray-800 p-4">
-        <Navbar :saldo="balance"></Navbar>
-        <div class="container mx-auto p-4">
-            <h1 class="text-2xl font-semibold mb-4">Caixas de CS:GO</h1>
-
+    <Navbar :saldo="balance"></Navbar>
+    <div class="bg-slate-900 p-4">
+        <div class="container mx-auto p-4 mt-8">
             <div class="flex justify-center items-center">
-                <button @click="open()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded">
+                <button @click="open()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded" v-if="$page.props.auth.user">
                     Abrir Por <b>{{ maskMoney(box.price) }}</b>
                 </button>
+                <a href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded" v-else>
+                    Abrir Por <b>{{ maskMoney(box.price) }}</b>
+                </a >
             </div>
 
-            <div class="flex flex-wrap flex-column mt-5">
-                <a :href="'/case/' + box.link" v-for="(item, index) in items" :key="index">
+            <h1 class="text-2xl text-white font-semibold mb-4 mt-10">Prêmios</h1>
+
+            <div class="flex flex-wrap flex-column">
+                <div  v-for="(item, index) in items" :key="index">
                     <div class="box">
                         <img :src="item.image_path" alt="Caixa 1">
                         <h2 class="text-lg font-semibold mt-2">{{ item.name }}</h2>
                         <!-- price -->
                         <p> <b>{{ maskMoney(item.price) }}</b></p>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- MODAL  -->
@@ -27,8 +30,14 @@
                 class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex justify-center items-center"
                 v-if="showModal">
                 <div class="bg-gray-800 rounded-lg p-8">
-                    <div class="text-white text-xl font-semibold mb-2">{{ itemName }}</div>
-                    {{ itemProbability }}
+                    <div class="flex justify-between text-white text-xl font-semibold mb-2">
+                        <span>
+                            {{ itemName }}
+                        </span>
+                        <span>
+                            {{ itemProbability }}%
+                        </span>
+                    </div> 
                     <div class="text-white text-xl font-semibold mb-2">{{ maskMoney(itemPrice) }}</div>
                     <img :src="itemImage" :alt="itemName" class="mb-4">
                     <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
@@ -122,11 +131,7 @@ export default {
 </script>
 
 <style>
-.container {
-    background-color: #1a1a1a;
-    color: #fff;
-    padding: 16px;
-}
+
 
 .box {
     background-color: #2d2d2d;
