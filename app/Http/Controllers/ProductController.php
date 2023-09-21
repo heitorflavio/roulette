@@ -35,17 +35,25 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        // return $request->all();
         $request->validate([
             'name'  => 'required',
             'image_path' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'status' => 'required',
-            'link' => 'required',
+            'probability' => 'required',
             'box_id' => 'required',
         ]);
         
-        $product = Product::create($request->all());
+        $product = Product::create([
+            'name'  => $request->name,
+            'image_path' => $request->image_path,
+            'description' => $request->description,
+            'price' => floatval($request->price),
+            'probability' => $request->probability,
+            'box_id' => $request->box_id,
+            'status' => 1,
+        ]);
 
         return redirect('/box/' . $request->box_id);
     }
@@ -77,8 +85,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('/box/' . $product->box_id);
     }
 }

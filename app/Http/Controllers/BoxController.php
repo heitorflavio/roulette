@@ -83,9 +83,15 @@ class BoxController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Box $box)
+    public function destroy($id)
     {
-        //
+        $product = Product::where('box_id', $id)->delete();
+
+        $box = Box::find($id);
+
+        $box->delete();
+
+        return redirect('/boxs');
     }
 
     public function open($boxId)

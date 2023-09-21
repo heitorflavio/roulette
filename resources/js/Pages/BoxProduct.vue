@@ -33,14 +33,15 @@
                                 <div class="lg:flex">
                                     <div>
                                         <h5 class="mb-0 dark:text-white">Todos os Produtos</h5>
-                                        <!-- <p class="mb-0 leading-normal text-sm"> A lightweight, extendable, dependency-free
-                                            javascript HTML table plugin. </p> -->
                                     </div>
                                     <div class="my-auto mt-6 ml-auto lg:mt-0">
                                         <div class="my-auto ml-auto">
                                             <a href="/product/create"
                                                 class="inline-block px-8 py-2 m-0 text-xs font-bold text-center text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer ease-soft-in leading-pro tracking-tight-soft bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85">+&nbsp;
                                                 Nova Produto</a>
+                                                <a :href="'/delete/box/'+box.id"
+                                                class="inline-block px-8 py-2 m-0 text-xs font-bold text-center text-white uppercase align-middle ml-2 transition-all border-0 rounded-lg cursor-pointer ease-soft-in leading-pro tracking-tight-soft bg-gradient-to-tl from-red-700 to-pink-500 shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85">-&nbsp;
+                                                Remover Produto</a>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +63,7 @@
                                                     <div class="flex">
                                                         <img class="ml-4 w-1/10"
                                                             :src="product.image_path"
-                                                            alt="hoodie">                                                   
+                                                            :alt="product.name">                                                   
                                                     </div>
                                                 </td>
                                                 <td>
@@ -72,10 +73,9 @@
                                                     <h6 class="my-auto ml-4 ">{{ maskMoney(product.price) }}</h6>
                                                 </td>
                                                 <td>
-                                                    <a class="btn bg-gradient-danger my-auto ml-12" :href="'/remover/'+product.id" style=background-color: red>X</a>
+                                                    <a class="btn bg-gradient-danger my-auto ml-12" :href="'/delete/product/'+product.id" style=background-color: red>X</a>
                                                 </td>
                                             </tr>
-
                                         </tbody>
                                         <tfoot>
                                             <tr>

@@ -52,6 +52,9 @@ Route::get('/box/{id}',[App\Http\Controllers\BoxController::class, 'show'] )->na
 Route::get('/product/create',[App\Http\Controllers\ProductController::class, 'create'] );
 Route::post('/product/create',[App\Http\Controllers\ProductController::class, 'store'] )->name('create.product');
 
+Route::get('/delete/product/{id}',[App\Http\Controllers\ProductController::class, 'destroy'] )->name('destroy.product');
+Route::get('/delete/box/{id}',[App\Http\Controllers\BoxController::class, 'destroy'] )->name('destroy.box');
+
 
 // Route::middleware([
 //     'auth:sanctum',

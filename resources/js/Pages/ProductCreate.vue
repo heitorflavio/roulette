@@ -7,8 +7,6 @@
         <main class="ease-soft-in-out xl:ml-68 relative h-full min-h-screen rounded-xl transition-all duration-200">
             <!-- Navbar -->
             <Navbar />
-
-
             <div class="w-full p-6 mx-auto mt-4">
                 <form action="/product/create" method="post">
                     <div class="flex flex-wrap -mx-3">
@@ -64,17 +62,8 @@
                                                 class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
                                                 for="box_id">Box</label>
                                             <select name="box_id" required class=" focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
-                                                <option v-for="box in boxs" :value="id" :key="box.id">{{box.name}}</option>
+                                                <option v-for="box in boxs" :value="box.id" :key="box.id">{{box.name}}</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-wrap mt-4 -mx-3">
-                                        <div class="w-full max-w-full px-3 flex-0">
-                                            <label
-                                                class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80"
-                                                for="status">Status</label>
-                                            <input type="text" name="status" required placeholder="1"
-                                                class="focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
                                         </div>
                                     </div>
                                 </div>

@@ -10,15 +10,13 @@
                 aria-hidden="true" sidenav-close-btn></i>
 
             <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700 dark:text-white"
-                href=" https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html " target="_blank">
-                <img src=""
+                href="/" target="_blank">
+                <img src="/assets/img/logo.jpg"
                     class="inline-block h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-8 dark:hidden"
                     alt="main_logo" />
-                <img src=""
-                    class="hidden h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-8 dark:inline-block"
-                    alt="main_logo" />
+               
 
-                <span class="ml-1 font-semibold transition-all duration-200 ease-soft-in-out">Soft UI Dashboard PRO</span>
+                <span class="ml-1 font-semibold transition-all duration-200 ease-soft-in-out">Urubu do Pix .ldta</span>
             </a>
         </div>
 
