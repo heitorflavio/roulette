@@ -22,7 +22,7 @@ class BoxFactory extends Factory
             'price' => $this->faker->randomFloat(2, 0, 99.99),
             'status' => 1,
             'link' => str_replace(' ', '-', strtolower($this->faker->name)),
-            'image_path' => $this->faker->imageUrl(),
+            'image_path' => 'https://images.steamcdn.io/csgonet/cases/JACKPOT-Case-Mycsgo.png',
         ];
     }
 }

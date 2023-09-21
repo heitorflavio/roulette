@@ -133,4 +133,12 @@ class HomeController extends Controller
 
      
     }
+
+    public function box(){
+        $cases = box::where('status', 1)->get();
+
+        return Inertia::render('Boxs', [
+            'cases' => $cases,
+        ]);
+    }
 }

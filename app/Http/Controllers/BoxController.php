@@ -7,6 +7,9 @@ use App\Http\Requests\StoreBoxRequest;
 use App\Http\Requests\UpdateBoxRequest;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Http\Request;
+
+use Inertia\Inertia;
 
 class BoxController extends Controller
 {
@@ -23,7 +26,7 @@ class BoxController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('BoxCreate');
     }
 
     /**
@@ -31,15 +34,34 @@ class BoxController extends Controller
      */
     public function store(StoreBoxRequest $request)
     {
-        //
+        $request->validate([
+            'name'  => 'required',
+            'image_path' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+            'link' => 'required',
+        ]);
+
+        $box = Box::create($request->all());
+
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Box $box)
+    public function show($id)
     {
-        //
+
+        $box = Box::find($id);
+
+        $products = Product::where('box_id', $box->id)->get();
+
+        return Inertia::render('BoxProduct',[
+            'box' => $box,
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -68,9 +90,6 @@ class BoxController extends Controller
 
     public function open($boxId)
     {
-
-
-
 
         $box = Box::find($boxId);
         // Obtém o prêmio aleatório
@@ -111,17 +130,6 @@ class BoxController extends Controller
         $user->balance += $premioAleatorio->price;
         $user->save();
 
-        // $premioAleatorio = $expandedArray[array_rand($expandedArray)];
-
-        // return $premioAleatorio;
-        // return $premioAleatorio;
-
-        // Se o prêmio aleatório for nulo, retorna erro
-        // if (is_null($premioAleatorio)) {
-        //     return response()->json([
-        //         'message' => 'Não há prêmios disponíveis para este baú.',
-        //     ], 400);
-        // }
 
         // Retorna o prêmio aleatório
         return response()->json([

@@ -41,6 +41,17 @@ Route::post('/register',[App\Http\Controllers\HomeController::class, 'register']
 Route::post('/login',[App\Http\Controllers\HomeController::class, 'login'] )->name('login.post');
 
 
+Route::post('/box/create',[App\Http\Controllers\BoxController::class, 'store'] )->name('create.box');
+Route::post('/create/product',[App\Http\Controllers\ProductController::class, 'store'] )->name('create.product');
+
+Route::get('/box/create',[App\Http\Controllers\BoxController::class, 'create'] )->name('create.boxs');
+Route::get('/boxs',[App\Http\Controllers\HomeController::class, 'box'] )->name('boxs');
+
+Route::get('/box/{id}',[App\Http\Controllers\BoxController::class, 'show'] )->name('products');
+
+Route::get('/product/create',[App\Http\Controllers\ProductController::class, 'create'] );
+Route::post('/product/create',[App\Http\Controllers\ProductController::class, 'store'] )->name('create.product');
+
 
 // Route::middleware([
 //     'auth:sanctum',

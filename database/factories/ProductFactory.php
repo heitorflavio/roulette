@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 0, 99.99),
             'probability' => $this->faker->numberBetween(1, 100),
             'box_id' => $this->faker->numberBetween(1, 4),
-            'image_path' => $this->faker->imageUrl(),
+            'image_path' => 'https://cdnhell.com/hellcase/img/case/saddle_n_steel/secondary_300x300.png',
             'status' => 1,
         ];
     }

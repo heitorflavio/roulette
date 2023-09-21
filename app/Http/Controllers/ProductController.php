@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Box;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -21,7 +23,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $boxs = Box::all();
+
+        return Inertia::render('ProductCreate',[
+            'boxs' => $boxs,
+        ]);
     }
 
     /**
@@ -29,7 +35,19 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $request->validate([
+            'name'  => 'required',
+            'image_path' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+            'link' => 'required',
+            'box_id' => 'required',
+        ]);
+        
+        $product = Product::create($request->all());
+
+        return redirect('/box/' . $request->box_id);
     }
 
     /**
